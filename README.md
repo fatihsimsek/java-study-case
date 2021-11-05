@@ -1,6 +1,6 @@
 # Java Study Case
 
-ReadingIsGood APIs
+ReadingIsGood APIs (Spring Boot / Hibernate / Jwt / Swagger)
 
 ## Getting Started
 
