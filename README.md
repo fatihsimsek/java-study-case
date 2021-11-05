@@ -4,6 +4,8 @@ ReadingIsGood APIs (Spring Boot / Hibernate / Jwt / Swagger)
 
 ## Getting Started
 
+You must set MySql connection info in property file
+
 ### DB Schema
 
 `CREATE TABLE `book` (
