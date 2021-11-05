@@ -8,6 +8,8 @@ You must set MySql connection info in property file
 
 ### DB Schema
 
+`CREATE DATABASE `getir_study_case`;`
+
 `CREATE TABLE `book` (
   `id` varchar(36) NOT NULL,
   `name` varchar(255) NOT NULL,
