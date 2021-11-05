@@ -4,6 +4,40 @@ ReadingIsGood APIs (Spring Boot / Hibernate / Jwt / Swagger)
 
 ## Getting Started
 
+### DB Schema
+
+`CREATE TABLE `book` (
+  `id` varchar(36) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `writerName` varchar(255) NOT NULL,
+  `amount` decimal(7,2) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `version` varchar(36) DEFAULT NULL,
+  `createDate` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+);`
+
+`CREATE TABLE `customer` (
+  `id` varchar(36) NOT NULL,
+  `fullname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `createDate` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+);`
+
+`CREATE TABLE `tOrder` (
+   `id` varchar(36) NOT NULL,
+   `customerId` varchar(36) NOT NULL,
+   `bookId` varchar(36) NOT NULL,
+   `count` int(11) NOT NULL,
+   `amount` decimal(10,2) NOT NULL,
+   `status` varchar(36) NOT NULL,
+   `createDate` datetime NOT NULL,
+   PRIMARY KEY (`id`)
+ )`
+
 ### Create Customer
 
 #### Request
