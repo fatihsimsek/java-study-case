@@ -19,10 +19,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", Pattern.CASE_INSENSITIVE);
+
     private final CustomerRepository customerRepository;
     private final OrderRepository orderRepository;
     private final AuthenticationManager authenticationManager;
@@ -79,11 +83,11 @@ public class CustomerServiceImpl implements CustomerService {
             return false;
         if(ObjectUtils.isEmpty(request.getPassword()))
             return false;
-        if(ObjectUtils.isEmpty(request.getEmail()))
-            return false;
         if(ObjectUtils.isEmpty(request.getFullname()))
             return false;
         if(!request.getPassword().equals(request.getRePassword()))
+            return false;
+        if(ObjectUtils.isEmpty(request.getEmail()) || !isValidEmail(request.getEmail()))
             return false;
 
         Optional<Customer> optionalCustomer = customerRepository.findByEmail(request.getEmail());
@@ -98,5 +102,9 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setPassword(this.passwordEncoder.encode(request.getPassword()));
         customer.setCreateDate(new Date());
         return customer;
+    }
+
+    private boolean isValidEmail(String emailAddress) {
+       return VALID_EMAIL_ADDRESS_REGEX.matcher(emailAddress).find();
     }
 }

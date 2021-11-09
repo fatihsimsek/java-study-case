@@ -58,6 +58,18 @@ public class CustomerTests {
     }
 
     @Test
+    void createCustomer_NotEmailOk() {
+        CustomerCreateRequest request = new CustomerCreateRequest();
+        request.setEmail("fatih.simsek.com");
+        request.setFullname("Fatih Şimşek");
+        request.setPassword("12345");
+        request.setRePassword("12345");
+
+        Customer customer = customerService.create(request);
+        Assert.isTrue(customer == null, "InValid Customer create result must be null ");
+    }
+
+    @Test
     void listOrder_Ok() {
         List<Order> orders = new ArrayList<>();
         Order order = new Order();
